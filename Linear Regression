@@ -1,0 +1,60 @@
+**Library**
+*   pip install matplotlib #for ploting
+*   pip install numpy #calculator library, array
+*   pip install pandas #data frame library
+*   pip install sklearn
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("/content/dhaka homeprice - dhaka homeprice.csv")
+df
+
+df.head
+
+df.shape
+
+df.isnull()
+
+df.isnull().sum()
+
+x = df[["area"]]
+
+y = df["price"]
+
+x
+
+y
+
+**Visulazation**
+
+plt.scatter(df['area'],df['price'],marker='+',color='red')
+plt.xlabel("Area in Squre fit")
+plt.ylabel("Price in Taka")
+plt.title("Home Prices in Dhaka")
+
+#library
+from sklearn.model_selection import train_test_split
+xtrain, xtest, ytrain, ytest = train_test_split(x,y,test_size=0.30,random_state=21)
+
+xtrain
+xtest
+
+from sklearn.linear_model import LinearRegression
+reg = LinearRegression() 
+reg.fit(xtrain,ytrain)
+reg.predict(xtest)
+
+plt.plot(df.area, reg.predict(df[['area']]))
+plt.scatter(df['area'],df['price'],marker='+',color='red')
+plt.xlabel("Area in Squre fit")
+plt.ylabel("Price in Taka")
+plt.title("Home Prices in Dhaka")
+
+reg.predict([[5000]])
+#y = mx+c
+reg.coef_
+reg.intercept_
+y = 17.52601016 * 5000 + 589.7653036535412
+y
